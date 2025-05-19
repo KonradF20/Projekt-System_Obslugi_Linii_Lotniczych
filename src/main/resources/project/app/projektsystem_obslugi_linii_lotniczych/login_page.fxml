@@ -9,27 +9,50 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="480.0" prefWidth="360.0" styleClass="menu" stylesheets="@../../../style/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.projektsystem_obslugi_linii_lotniczych.LoginController">
+<AnchorPane prefHeight="480.0" prefWidth="400.0" styleClass="menu" stylesheets="@../../../style/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.projektsystem_obslugi_linii_lotniczych.LoginPage">
     <children>
         <VBox alignment="CENTER" spacing="15.0" styleClass="root" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
-            <ImageView fx:id="logoImage" fitHeight="150.0" fitWidth="250.0" pickOnBounds="true">
+            <ImageView fx:id="logoImage" fitHeight="180.0" fitWidth="300.0" pickOnBounds="true">
                 <image>
                     <Image url="@../../../images/Logo_FlyNow.png" />
                 </image>
             </ImageView>
+         <Label alignment="CENTER" prefHeight="35.0" prefWidth="343.0" text="Logowanie" textFill="#1e4d91">
+            <font>
+               <Font name="System Bold" size="24.0" />
+            </font>
+         </Label>
             <VBox alignment="CENTER_LEFT" spacing="5.0">
-                <Label styleClass="input-label" text="Email" />
-                <TextField fx:id="emailField" promptText="Podaj email" styleClass="input-field" />
-                <Label fx:id="emailError" styleClass="error-label" text="Niepoprawny email" />
-                <Label styleClass="input-label" text="Hasło" />
-                <PasswordField fx:id="passwordField" promptText="Podaj hasło" styleClass="input-field" />
-                <Label fx:id="passwordError" styleClass="error-label" text="Niepoprawne hasło" visible="false" />
-                <CheckBox fx:id="showPasswordCheckBox" styleClass="checkbox" text="Pokaż hasło" />
+                <Label alignment="CENTER" prefHeight="20.0" prefWidth="393.0" styleClass="input-label" text="Email" />
+                <TextField fx:id="emailField" focusTraversable="false" promptText="Podaj email" styleClass="input-field">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></TextField>
+                <Label fx:id="emailError" alignment="CENTER" prefHeight="17.0" prefWidth="405.0" styleClass="error-label" text="Niepoprawny email" visible="false" />
+                <Label alignment="CENTER" prefHeight="20.0" prefWidth="393.0" styleClass="input-label" text="Hasło" />
+                <PasswordField fx:id="passwordField" focusTraversable="false" promptText="Podaj hasło" styleClass="input-field">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></PasswordField>
+                <TextField fx:id="visiblePasswordField" focusTraversable="false" promptText="Podaj hasło" styleClass="input-field" visible="false" managed="false">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </TextField>
+                <Label fx:id="passwordError" alignment="CENTER" prefHeight="17.0" prefWidth="443.0" styleClass="error-label" text="Niepoprawne hasło" visible="false" />
+                <CheckBox fx:id="showPasswordCheckBox" focusTraversable="false" prefHeight="19.0" prefWidth="357.0" styleClass="checkbox" text="Pokaż hasło" />
             </VBox>
             <VBox alignment="CENTER" spacing="10.0">
-                <Button fx:id="loginButton" styleClass="primary-button" text="Zaloguj się" />
-                <Button fx:id="signupButton" styleClass="secondary-button" text="Zarejestruj się" />
+                <Button onAction="#loginUser" fx:id="loginButton" styleClass="primary-button" text="Zaloguj się">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+                <Button onAction="#goToSignup" fx:id="signupButton" styleClass="secondary-button" text="Zarejestruj się">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
             </VBox>
         </VBox>
     </children>

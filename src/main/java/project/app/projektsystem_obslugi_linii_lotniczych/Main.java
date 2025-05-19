@@ -13,8 +13,9 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("login_page.fxml"));
         Scene scene = new Scene(loader.load());
-        stage.setTitle("FlyNow - Logowanie");
-        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Ikonka_FlyNow.png"))));
+        stage.setTitle("FlyNow");
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Ikonka_FlyNow.png"))));
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }
