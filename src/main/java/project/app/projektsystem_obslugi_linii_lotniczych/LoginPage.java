@@ -11,7 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class LoginPage {
+public class LoginPage extends FocusController{
 
     @FXML private TextField emailField;
     @FXML private PasswordField passwordField;
@@ -23,56 +23,57 @@ public class LoginPage {
     @FXML private Button signupButton;
 
     @FXML
-    public void initialize() {
-        // Obsługa widoczności hasła
-        showPasswordCheckBox.selectedProperty().addListener((obs, wasSelected, isSelected) -> {
-            if (isSelected) {
-                showPlainPassword();
-            } else {
-                hidePlainPassword();
-            }
-        });
-    }
-
-    @FXML
     public void loginUser() {
         String email = emailField.getText().trim();
-        String password = showPasswordCheckBox.isSelected()
-                ? visiblePasswordField.getText()
-                : passwordField.getText();
+        String password;
+        if (showPasswordCheckBox.isSelected()){
+            password = visiblePasswordField.getText();
+        } else {
+           password = passwordField.getText();
+        }
 
-        emailError.setVisible(false);
-        passwordError.setVisible(false);
-
-        if (email.isEmpty() || !email.contains("@")) {
-            emailError.setText("Niepoprawny email");
+        if (email.isEmpty()) {
+            emailError.setText("Email nie może być pusty");
             emailError.setVisible(true);
-            return;
+        } else if (!email.contains("@")) {
+            emailError.setText("Email musi zawierać '@'");
+            emailError.setVisible(true);
+        } else {
+            emailError.setVisible(false);
         }
 
         if (password.isEmpty()) {
             passwordError.setText("Hasło nie może być puste");
             passwordError.setVisible(true);
             return;
+        } else {
+            passwordError.setVisible(false);
         }
 
         try (Connection conn = DatabaseConnection.getConnection()) {
-            String query = "SELECT * FROM users WHERE email = ? AND password = ?";
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, email);
-            stmt.setString(2, password);
-
-            ResultSet rs = stmt.executeQuery();
+            String checkEmailQuery = "SELECT password, role FROM users WHERE email = ?";
+            PreparedStatement emailStmt = conn.prepareStatement(checkEmailQuery);
+            emailStmt.setString(1, email);
+            ResultSet rs = emailStmt.executeQuery();
 
             if (rs.next()) {
-                // Logowanie udane
-                System.out.println("Zalogowano jako: " + rs.getString("email") + " (rola: " + rs.getString("role") + ")");
-                InfoDisplay.email = rs.getString("email");
-                // Tutaj można przejść do głównego widoku aplikacji
-                goToMainView();
+                String correctPassword = rs.getString("password");
+                String role = rs.getString("role");
+                if (correctPassword.equals(password)) {
+                    InfoDisplay.email = email;
+                    InfoDisplay.role = role;
+                    if ("admin".equalsIgnoreCase(role)) {
+                        goToAdminPage();
+                    } else {
+                        goToMainPage();
+                    }
+                } else {
+                    passwordError.setText("Niepoprawne hasło");
+                    passwordError.setVisible(true);
+                }
             } else {
-                passwordError.setText("Niepoprawny email lub hasło");
-                passwordError.setVisible(true);
+                emailError.setText("Niepoprawny email");
+                emailError.setVisible(true);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -80,7 +81,7 @@ public class LoginPage {
     }
 
     @FXML
-    public void goToSignup() {
+    public void goToSignupPage() {
         //Przejście do rejestracji
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/app/projektsystem_obslugi_linii_lotniczych/signup_page.fxml"));
@@ -92,7 +93,7 @@ public class LoginPage {
         }
     }
 
-    private void goToMainView() {
+    public void goToMainPage() {
         //Przejście do głównego widoku
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/app/projektsystem_obslugi_linii_lotniczych/main_page.fxml"));
@@ -104,23 +105,33 @@ public class LoginPage {
         }
     }
 
-     //Obsługa widoczności hasła
-     private void showPlainPassword() {
-         visiblePasswordField.setText(passwordField.getText());
-         visiblePasswordField.setVisible(true);
-         visiblePasswordField.setManaged(true);
+    public void goToAdminPage() {
+        //Przejście do widoku admina
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/app/projektsystem_obslugi_linii_lotniczych/admin_page.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) loginButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-         passwordField.setVisible(false);
-         passwordField.setManaged(false);
-     }
-
-    private void hidePlainPassword() {
-        passwordField.setText(visiblePasswordField.getText());
-        passwordField.setVisible(true);
-        passwordField.setManaged(true);
-
-        visiblePasswordField.setVisible(false);
-        visiblePasswordField.setManaged(false);
+    @FXML
+    public void ChangePasswordVisibility(){
+        if (showPasswordCheckBox.isSelected()) {
+            visiblePasswordField.setText(passwordField.getText());
+            visiblePasswordField.setVisible(true);
+            visiblePasswordField.setManaged(true);
+            passwordField.setVisible(false);
+            passwordField.setManaged(false);
+        } else {
+            passwordField.setText(visiblePasswordField.getText());
+            passwordField.setVisible(true);
+            passwordField.setManaged(true);
+            visiblePasswordField.setVisible(false);
+            visiblePasswordField.setManaged(false);
+        }
     }
 }
 

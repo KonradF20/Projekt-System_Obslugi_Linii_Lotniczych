@@ -9,7 +9,6 @@
 }
 
 .input-label {
-    -fx-font-size: 14px;
     -fx-text-fill: #333;
 }
 
@@ -40,8 +39,4 @@
     -fx-border-radius: 10px;
     -fx-pref-width: 300px;
     -fx-pref-height: 35px;
-}
-
-.checkbox {
-    -fx-font-size: 13px;
 }
