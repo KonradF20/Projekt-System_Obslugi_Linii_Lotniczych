@@ -4,14 +4,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 public class LoginController {
-    @FXML
-    private TextField usernameField;
+    @FXML private TextField emailField;
     @FXML private PasswordField passwordField;
     @FXML private Label errorLabel;
 
     @FXML
     private void handleLogin() {
-        String user = usernameField.getText();
+        String user = emailField.getText();
         String pass = passwordField.getText();
 
         if ("admin".equals(user) && "1234".equals(pass)) {
