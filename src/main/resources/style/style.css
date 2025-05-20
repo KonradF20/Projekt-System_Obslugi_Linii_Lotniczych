@@ -1,26 +1,20 @@
 .root {
     -fx-background-color: #f5f5f5;
-    -fx-padding: 20;
-    -fx-background-radius: 20;
+    -fx-padding: 20px;
+    -fx-background-radius: 20px;
 }
 
 .menu {
     -fx-background-color: white;
 }
 
-.input-label {
-    -fx-text-fill: #333;
-}
-
 .input-field {
     -fx-pref-height: 35px;
-    -fx-background-radius: 8px;
-    -fx-border-radius: 8px;
+    -fx-background-radius: 10px;
 }
 
 .error-label {
     -fx-text-fill: red;
-    -fx-font-size: 12px;
 }
 
 .primary-button {
@@ -35,7 +29,6 @@
     -fx-background-color: white;
     -fx-border-color: #1e4d91;
     -fx-text-fill: #1e4d91;
-    -fx-background-radius: 10px;
     -fx-border-radius: 10px;
     -fx-pref-width: 300px;
     -fx-pref-height: 35px;

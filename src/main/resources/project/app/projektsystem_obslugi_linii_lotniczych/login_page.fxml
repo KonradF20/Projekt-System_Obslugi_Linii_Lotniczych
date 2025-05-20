@@ -13,12 +13,9 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane onMouseClicked="#FocusOn" prefHeight="480.0" prefWidth="400.0" styleClass="menu" stylesheets="@../../../style/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.projektsystem_obslugi_linii_lotniczych.LoginPage">
-    <children>
-        <VBox fx:id="main" alignment="CENTER" spacing="15.0" styleClass="root" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
-            <ImageView fx:id="logoImage" fitHeight="95.0" fitWidth="300.0" pickOnBounds="true">
-                <image>
-                    <Image url="@../../../images/Logo_FlyNow.png" />
-                </image>
+        <VBox alignment="TOP_CENTER" spacing="15.0" styleClass="root" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
+            <ImageView fitHeight="95.0" fitWidth="300.0" pickOnBounds="true">
+                <Image url="@../../../images/Logo_FlyNow.png" />
             </ImageView>
          <Label alignment="TOP_CENTER" prefHeight="28.0" prefWidth="300.0" text="Logowanie" textFill="#1e4d91">
             <font>
@@ -33,7 +30,7 @@
                <font>
                   <Font name="System Bold" size="14.0" />
                </font></Label>
-                <TextField fx:id="emailField" focusTraversable="false" promptText="Podaj email" styleClass="input-field">
+                <TextField onMouseClicked="#FocusOn" fx:id="emailField" focusTraversable="false" promptText="Podaj email" styleClass="input-field">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></TextField>
@@ -62,11 +59,10 @@
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
-                <Button fx:id="signupButton" onAction="#goToSignupPage" styleClass="secondary-button" text="Zarejestruj się">
+                <Button fx:id="signupButton" onAction="#gotoSignupPage" styleClass="secondary-button" text="Zarejestruj się">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
             </VBox>
         </VBox>
-    </children>
 </AnchorPane>

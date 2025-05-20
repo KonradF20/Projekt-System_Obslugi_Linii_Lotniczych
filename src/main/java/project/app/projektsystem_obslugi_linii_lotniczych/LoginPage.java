@@ -3,15 +3,12 @@ package project.app.projektsystem_obslugi_linii_lotniczych;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
-public class LoginPage extends FocusController{
+public class LoginPage extends FocusController {
 
     @FXML private TextField emailField;
     @FXML private PasswordField passwordField;
@@ -35,9 +32,11 @@ public class LoginPage extends FocusController{
         if (email.isEmpty()) {
             emailError.setText("Email nie może być pusty");
             emailError.setVisible(true);
+            return;
         } else if (!email.contains("@")) {
             emailError.setText("Email musi zawierać '@'");
             emailError.setVisible(true);
+            return;
         } else {
             emailError.setVisible(false);
         }
@@ -49,6 +48,34 @@ public class LoginPage extends FocusController{
         } else {
             passwordError.setVisible(false);
         }
+
+//        if (email.isEmpty() && password.isEmpty()) {
+//            emailError.setText("Email nie może być pusty");
+//            emailError.setVisible(true);
+//            passwordError.setText("Hasło nie może być puste");
+//            passwordError.setVisible(true);
+//            return;
+//        } else if(!email.contains("@") && password.isEmpty()) {
+//            emailError.setText("Email musi zawierać '@'");
+//            emailError.setVisible(true);
+//            passwordError.setText("Hasło nie może być puste");
+//            passwordError.setVisible(true);
+//            return;
+//        } else if(!email.contains("@") && !password.isEmpty()) {
+//            emailError.setText("Email musi zawierać '@'");
+//            emailError.setVisible(true);
+//            passwordError.setVisible(false);
+//            return;
+//        } else if (password.isEmpty()){
+//            emailError.setText("Email nie może być pusty");
+//            emailError.setVisible(true);
+//            passwordError.setText("Hasło nie może być puste");
+//            passwordError.setVisible(true);
+//            return;
+//        }else {
+//            emailError.setVisible(false);
+//            passwordError.setVisible(false);
+//        }
 
         try (Connection conn = DatabaseConnection.getConnection()) {
             String checkEmailQuery = "SELECT password, role FROM users WHERE email = ?";
@@ -62,10 +89,11 @@ public class LoginPage extends FocusController{
                 if (correctPassword.equals(password)) {
                     InfoDisplay.email = email;
                     InfoDisplay.role = role;
+                    Stage stage = (Stage) loginButton.getScene().getWindow();
                     if ("admin".equalsIgnoreCase(role)) {
-                        goToAdminPage();
+                        ViewPageController.goToAdminPage(stage);
                     } else {
-                        goToMainPage();
+                        ViewPageController.goToMainPage(stage);
                     }
                 } else {
                     passwordError.setText("Niepoprawne hasło");
@@ -75,46 +103,16 @@ public class LoginPage extends FocusController{
                 emailError.setText("Niepoprawny email");
                 emailError.setVisible(true);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            passwordError.setText("Błąd połączenia z bazą danych: "+ e.getMessage());
+            passwordError.setVisible(true);
         }
     }
 
     @FXML
-    public void goToSignupPage() {
-        //Przejście do rejestracji
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/app/projektsystem_obslugi_linii_lotniczych/signup_page.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) signupButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void goToMainPage() {
-        //Przejście do głównego widoku
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/app/projektsystem_obslugi_linii_lotniczych/main_page.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) loginButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void goToAdminPage() {
-        //Przejście do widoku admina
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/app/projektsystem_obslugi_linii_lotniczych/admin_page.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) loginButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void gotoSignupPage() {
+        Stage stage = (Stage) signupButton.getScene().getWindow();
+        ViewPageController.goToSignupPage(stage);
     }
 
     @FXML

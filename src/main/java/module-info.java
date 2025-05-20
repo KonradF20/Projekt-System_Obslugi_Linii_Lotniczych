@@ -10,7 +10,6 @@ module project.app.projektsystem_obslugi_linii_lotniczych {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
-    requires mysql.connector.j;
 
     opens project.app.projektsystem_obslugi_linii_lotniczych to javafx.fxml;
     exports project.app.projektsystem_obslugi_linii_lotniczych;
