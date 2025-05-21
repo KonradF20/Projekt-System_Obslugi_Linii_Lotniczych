@@ -1,0 +1,37 @@
+.top-bar {
+    -fx-background-color: #2a5caa;
+    -fx-padding: 10px;
+}
+
+.logo-label {
+    -fx-text-fill: white;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+}
+
+.balance-label {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.section-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.flight-list {
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-padding: 10px;
+}
+
+.user-info {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+}

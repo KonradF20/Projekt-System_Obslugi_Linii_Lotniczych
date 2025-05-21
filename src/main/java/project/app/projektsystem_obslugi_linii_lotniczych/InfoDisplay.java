@@ -4,15 +4,23 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class InfoDisplay {
+
     public static String email;
     public static String role;
+    static String rola;
+    static String formattedDate;
 
-    public static void display() {
+    public static String display() {
+
         LocalDateTime currentDateTime = LocalDateTime.now();
-        String formattedDate = currentDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        formattedDate = currentDateTime.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
 
-        System.out.println("Zalogowany użytkownik: " + email);
-        System.out.println("Rola: " + role);
-        System.out.println("Aktualna data i godzina: " + formattedDate);
+        if ("admin".equalsIgnoreCase(role)) {
+            rola = "Administrator";
+        } else {
+            rola = "Użytkownik";
+        }
+
+        return "Zalogowany: " + email + " | Rola: " + rola + " | " + formattedDate;
     }
 }

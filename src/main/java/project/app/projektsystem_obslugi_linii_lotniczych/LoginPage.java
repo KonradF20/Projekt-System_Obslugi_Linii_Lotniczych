@@ -49,34 +49,6 @@ public class LoginPage extends FocusController {
             passwordError.setVisible(false);
         }
 
-//        if (email.isEmpty() && password.isEmpty()) {
-//            emailError.setText("Email nie może być pusty");
-//            emailError.setVisible(true);
-//            passwordError.setText("Hasło nie może być puste");
-//            passwordError.setVisible(true);
-//            return;
-//        } else if(!email.contains("@") && password.isEmpty()) {
-//            emailError.setText("Email musi zawierać '@'");
-//            emailError.setVisible(true);
-//            passwordError.setText("Hasło nie może być puste");
-//            passwordError.setVisible(true);
-//            return;
-//        } else if(!email.contains("@") && !password.isEmpty()) {
-//            emailError.setText("Email musi zawierać '@'");
-//            emailError.setVisible(true);
-//            passwordError.setVisible(false);
-//            return;
-//        } else if (password.isEmpty()){
-//            emailError.setText("Email nie może być pusty");
-//            emailError.setVisible(true);
-//            passwordError.setText("Hasło nie może być puste");
-//            passwordError.setVisible(true);
-//            return;
-//        }else {
-//            emailError.setVisible(false);
-//            passwordError.setVisible(false);
-//        }
-
         try (Connection conn = DatabaseConnection.getConnection()) {
             String checkEmailQuery = "SELECT password, role FROM users WHERE email = ?";
             PreparedStatement emailStmt = conn.prepareStatement(checkEmailQuery);

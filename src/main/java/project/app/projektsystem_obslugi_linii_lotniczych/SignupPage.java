@@ -31,6 +31,7 @@ public class SignupPage extends FocusController{
         if (email.isEmpty()) {
             emailError.setText("Email nie może być pusty");
             emailError.setVisible(true);
+            return;
         } else if (!email.contains("@")) {
             emailError.setText("Email musi zawierać '@'");
             emailError.setVisible(true);

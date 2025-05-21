@@ -48,6 +48,7 @@ public class ViewPageController {
             FXMLLoader loader = new FXMLLoader(ViewPageController.class.getResource("/project/app/projektsystem_obslugi_linii_lotniczych/main_page.fxml"));
             Parent root = loader.load();
             stage.setScene(new Scene(root));
+            stage.centerOnScreen();
         } catch (Exception e) {
             System.out.println("Błąd podczas przejścia do ekranu głównego: " + e.getMessage());
         }
