@@ -26,6 +26,7 @@ public class ViewPageController {
             FXMLLoader loader = new FXMLLoader(ViewPageController.class.getResource("/project/app/projektsystem_obslugi_linii_lotniczych/login_page.fxml"));
             Parent root = loader.load();
             stage.setScene(new Scene(root));
+            stage.centerOnScreen();
         } catch (Exception e) {
             System.out.println("Błąd podczas przejścia do ekranu logowania: " + e.getMessage());
         }
@@ -37,6 +38,7 @@ public class ViewPageController {
             FXMLLoader loader = new FXMLLoader(ViewPageController.class.getResource("/project/app/projektsystem_obslugi_linii_lotniczych/signup_page.fxml"));
             Parent root = loader.load();
             stage.setScene(new Scene(root));
+            stage.centerOnScreen();
         } catch (Exception e) {
             System.out.println("Błąd podczas przejścia do ekranu rejestracji: " + e.getMessage());
         }
@@ -60,6 +62,19 @@ public class ViewPageController {
             FXMLLoader loader = new FXMLLoader(ViewPageController.class.getResource("/project/app/projektsystem_obslugi_linii_lotniczych/admin_page.fxml"));
             Parent root = loader.load();
             stage.setScene(new Scene(root));
+            stage.centerOnScreen();
+        } catch (Exception e) {
+            System.out.println("Błąd podczas przejścia do panelu administratora: " + e.getMessage());
+        }
+    }
+
+    public static void goToReservationPage(Stage stage) {
+        //Przejście do panelu rezerwacji
+        try {
+            FXMLLoader loader = new FXMLLoader(ViewPageController.class.getResource("/project/app/projektsystem_obslugi_linii_lotniczych/reservation_page.fxml"));
+            Parent root = loader.load();
+            stage.setScene(new Scene(root));
+            stage.centerOnScreen();
         } catch (Exception e) {
             System.out.println("Błąd podczas przejścia do panelu administratora: " + e.getMessage());
         }

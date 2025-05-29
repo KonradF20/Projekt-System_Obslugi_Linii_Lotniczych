@@ -1,37 +1,86 @@
-.top-bar {
-    -fx-background-color: #2a5caa;
-    -fx-padding: 10px;
+.root {
+    -fx-background-color: white;
 }
 
-.logo-label {
+.top-bar {
+    -fx-background-color:  #1e4d91;
+    -fx-padding: 20px;
+    -fx-background-radius: 20px;
+}
+
+.menu {
+    -fx-background-color: #f5f5f5;
+    -fx-padding: 20px;
+    -fx-background-radius: 20px;
+}
+
+.menu-button {
+    -fx-background-color: transparent;
     -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.balance {
     -fx-font-size: 24px;
     -fx-font-weight: bold;
 }
 
-.nav-button {
-    -fx-background-color: transparent;
+.balance1 {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.data {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.balance-button {
+    -fx-background-color:  #1e4d91;
     -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.flight-row {
+    -fx-background-color: #f8f8f8;
+    -fx-padding: 10;
+    -fx-border-color: #ddd;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+}
+
+.flight-code {
+    -fx-font-weight: bold;
     -fx-font-size: 16px;
 }
 
-.balance-label {
-    -fx-font-size: 18px;
+.reserve-button {
+    -fx-background-color: #1e4d91;
+    -fx-text-fill: white;
     -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-padding: 6 12;
+    -fx-cursor: hand;
 }
 
-.section-title {
-    -fx-font-size: 18px;
+.logout-button {
+    -fx-background-color: white;
+    -fx-border-color: #1e4d91;
+    -fx-text-fill: #1e4d91;
     -fx-font-weight: bold;
-}
-
-.flight-list {
-    -fx-border-color: #ccc;
-    -fx-border-width: 1px;
-    -fx-padding: 10px;
+    -fx-background-color: transparent;
+    -fx-border-radius: 6;
+    -fx-padding: 6 14;
+    -fx-cursor: hand;
 }
 
 .user-info {
+    -fx-text-fill: #444;
     -fx-font-size: 14px;
-    -fx-text-fill: #333;
 }

@@ -4,9 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-public class MainPage extends InfoDisplay{
+public class ReservationPage extends InfoDisplay{
 
-    @FXML private Button reserveButton;
+    @FXML private Button flightsButton;
     @FXML private Button logoutButton;
     @FXML private Label infoLabel;
 
@@ -22,8 +22,8 @@ public class MainPage extends InfoDisplay{
     }
 
     @FXML
-    public void goToReservationPage() {
-        Stage stage = (Stage) reserveButton.getScene().getWindow();
-        ViewPageController.goToReservationPage(stage);
+    public void goToMainPage() {
+        Stage stage = (Stage) flightsButton.getScene().getWindow();
+        ViewPageController.goToMainPage(stage);
     }
 }

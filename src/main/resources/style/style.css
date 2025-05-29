@@ -23,6 +23,7 @@
     -fx-background-radius: 10px;
     -fx-pref-width: 300px;
     -fx-pref-height: 35px;
+    -fx-cursor: hand;
 }
 
 .secondary-button {
@@ -32,4 +33,5 @@
     -fx-border-radius: 10px;
     -fx-pref-width: 300px;
     -fx-pref-height: 35px;
+    -fx-cursor: hand;
 }
