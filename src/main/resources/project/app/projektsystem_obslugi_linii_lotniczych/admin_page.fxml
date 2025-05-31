@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="project.app.projektsystem_obslugi_linii_lotniczych.AdminPage"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="550.0" prefWidth="974.0" styleClass="root" stylesheets="@../../../style/style1.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.projektsystem_obslugi_linii_lotniczych.AdminPage">
+<HBox alignment="CENTER_LEFT" spacing="30.0" styleClass="top-bar" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+    <ImageView fitHeight="60.0" fitWidth="195.0" pickOnBounds="true">
+        <Image url="@../../../images/Logo_FlyNowWhite.png" />
+    </ImageView>
+</HBox>
+<VBox prefHeight="417.0" prefWidth="934.0" spacing="20" styleClass="menu" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="120.0">
+    <HBox prefHeight="50.0" prefWidth="894.0" spacing="20">
+        <Button fx:id="logoutButton" onAction="#goToLoginPage" styleClass="logout-button" text="Wyloguj" />
+        <Label fx:id="infoLabel" alignment="CENTER" prefHeight="31.0" prefWidth="795.0" styleClass="user-info" text=" " />
+    </HBox>
+</VBox>
 </AnchorPane>

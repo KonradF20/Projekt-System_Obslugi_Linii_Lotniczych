@@ -45,38 +45,50 @@ public class ViewPageController {
     }
 
     public static void goToMainPage(Stage stage) {
-        //Przejście do ekranu głównego
+        //Przejście do ekranu głównego użytkownika
         try {
             FXMLLoader loader = new FXMLLoader(ViewPageController.class.getResource("/project/app/projektsystem_obslugi_linii_lotniczych/main_page.fxml"));
             Parent root = loader.load();
             stage.setScene(new Scene(root));
             stage.centerOnScreen();
         } catch (Exception e) {
-            System.out.println("Błąd podczas przejścia do ekranu głównego: " + e.getMessage());
+            System.out.println("Błąd podczas przejścia do ekranu głównego użytkownika: " + e.getMessage());
         }
     }
 
     public static void goToAdminPage(Stage stage) {
-        //Przejście do panelu administratora
+        //Przejście do ekranu głównego administratora
         try {
             FXMLLoader loader = new FXMLLoader(ViewPageController.class.getResource("/project/app/projektsystem_obslugi_linii_lotniczych/admin_page.fxml"));
             Parent root = loader.load();
             stage.setScene(new Scene(root));
             stage.centerOnScreen();
         } catch (Exception e) {
-            System.out.println("Błąd podczas przejścia do panelu administratora: " + e.getMessage());
+            System.out.println("Błąd podczas przejścia do ekranu głównego administratora: " + e.getMessage());
         }
     }
 
     public static void goToReservationPage(Stage stage) {
-        //Przejście do panelu rezerwacji
+        //Przejście do ekranu rezerwacji
         try {
             FXMLLoader loader = new FXMLLoader(ViewPageController.class.getResource("/project/app/projektsystem_obslugi_linii_lotniczych/reservation_page.fxml"));
             Parent root = loader.load();
             stage.setScene(new Scene(root));
             stage.centerOnScreen();
         } catch (Exception e) {
-            System.out.println("Błąd podczas przejścia do panelu administratora: " + e.getMessage());
+            System.out.println("Błąd podczas przejścia do ekranu rezerwacji: " + e.getMessage());
+        }
+    }
+
+    public static void goToDepositPage(Stage stage) {
+        //Przejście do ekranu wpłacania pieniędzy
+        try {
+            FXMLLoader loader = new FXMLLoader(ViewPageController.class.getResource("/project/app/projektsystem_obslugi_linii_lotniczych/deposit_page.fxml"));
+            Parent root = loader.load();
+            stage.setScene(new Scene(root));
+            stage.centerOnScreen();
+        } catch (Exception e) {
+            System.out.println("Błąd podczas przejścia do ekranu wpłacania pieniędzy: " + e.getMessage());
         }
     }
 }

@@ -61,6 +61,8 @@ public class LoginPage extends FocusController {
                 if (correctPassword.equals(password)) {
                     InfoDisplay.email = email;
                     InfoDisplay.role = role;
+                    MainPage.email = email;
+                    DepositPage.email = email;
                     Stage stage = (Stage) loginButton.getScene().getWindow();
                     if ("admin".equalsIgnoreCase(role)) {
                         ViewPageController.goToAdminPage(stage);
