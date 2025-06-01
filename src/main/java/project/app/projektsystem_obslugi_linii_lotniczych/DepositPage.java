@@ -39,6 +39,12 @@ public class DepositPage extends FocusController{
             return;
         }
 
+        if (balance >= 100000000) {
+            depositError.setText("Wprowadź mniejszą kwotę");
+            depositError.setVisible(true);
+            return;
+        }
+
         try (Connection conn = DatabaseConnection.getConnection()){
             String sql = "UPDATE users SET balance = balance + ? WHERE email = ?";
             PreparedStatement balanceStmt = conn.prepareStatement(sql);
@@ -48,6 +54,7 @@ public class DepositPage extends FocusController{
             goToMainPage();
         } catch (SQLException e) {
             depositError.setText("Błąd przy aktualizacji salda: "+ e.getMessage());
+            depositError.setVisible(true);
         }
     }
 

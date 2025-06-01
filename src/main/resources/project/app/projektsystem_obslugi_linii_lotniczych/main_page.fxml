@@ -10,60 +10,68 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="550.0" prefWidth="974.0" styleClass="root" stylesheets="@../../../style/style1.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.projektsystem_obslugi_linii_lotniczych.MainPage">
+<AnchorPane prefHeight="566.0" prefWidth="974.0" styleClass="root" stylesheets="@../../../style/style1.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.projektsystem_obslugi_linii_lotniczych.MainPage">
     <HBox alignment="CENTER_LEFT" spacing="30.0" styleClass="top-bar" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
         <ImageView fitHeight="60.0" fitWidth="195.0" pickOnBounds="true">
             <Image url="@../../../images/Logo_FlyNowWhite.png" />
         </ImageView>
         <HBox alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="682.0" spacing="30.0">
-            <Button styleClass="menu-button" text="Loty" />
-            <Button fx:id="reserveButton" onAction="#goToReservationPage" prefHeight="30.0" prefWidth="146.0" styleClass="menu-button" text="Rezerwacje" />
+            <Button styleClass="menu-button" text="Loty" underline="true" />
+            <Button fx:id="reservationButton" onAction="#goToReservationPage" prefHeight="30.0" prefWidth="146.0" styleClass="menu-button" text="Rezerwacje" />
         </HBox>
     </HBox>
-    <VBox prefHeight="417.0" prefWidth="934.0" spacing="20" styleClass="menu" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="120.0">
-        <HBox alignment="CENTER_RIGHT" prefHeight="65.0" prefWidth="870.0" spacing="40.0">
-         <HBox alignment="CENTER" spacing="10.0">
-             <Label styleClass="balance" text="Saldo:" />
-             <Label fx:id="balanceShow" styleClass="balance1" text=" " />
-         </HBox>
-            <Button fx:id="depositButton" onAction="#goToDepositPage" styleClass="balance-button" text="Wpłać" />
+    <VBox prefHeight="426.0" prefWidth="934.0" spacing="20.0" styleClass="menu" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="120.0">
+        <HBox alignment="CENTER_RIGHT" prefHeight="65.0" prefWidth="870.0" spacing="30.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="379.0" spacing="10.0">
+                <Label styleClass="data" text="Data:" />
+                <DatePicker fx:id="datePicker" focusTraversable="false" />
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="37.0" prefWidth="332.0" spacing="10.0">
+                <Label prefHeight="32.0" prefWidth="67.0" styleClass="balance" text="Saldo:" />
+                <Label fx:id="balanceShow" prefHeight="30.0" prefWidth="146.0" styleClass="balance1" text=" " />
+            </HBox>
+                <Button fx:id="depositButton" onAction="#goToDepositPage" styleClass="balance-button" text="Wpłać" />
         </HBox>
-        <HBox alignment="CENTER_LEFT" spacing="10">
-            <Label styleClass="data" text="Data:" />
-            <DatePicker fx:id="datePicker" focusTraversable="false" />
-        </HBox>
-        <VBox spacing="5">
-            <HBox alignment="CENTER_LEFT" spacing="20" styleClass="flight-row">
+        <VBox alignment="CENTER" spacing="3.0">
+            <HBox alignment="CENTER" spacing="20.0" styleClass="flight-row">
                 <Label styleClass="flight-code" text="WAW" />
                 <Label prefHeight="27.0" prefWidth="704.0" text="Warszawa → BCN – 13:00 Barcelona">
                <font>
                   <Font size="18.0" />
                </font></Label>
-                <Button styleClass="reserve-button" text="Rezerwuj" />
+                <Button fx:id="reserveButton" onAction="#goToTicketPage" styleClass="reserve-button" text="Rezerwuj" />
             </HBox>
-            <HBox spacing="20" styleClass="flight-row">
+            <HBox alignment="CENTER" spacing="20" styleClass="flight-row">
+                <Label styleClass="flight-code" text="KRK" />
+                <Label prefHeight="27.0" prefWidth="715.0" text="Kraków → BCN – 13:00 Barcelona">
+                    <font>
+                        <Font size="18.0" />
+                    </font></Label>
+                <Button onAction="#goToTicketPage" styleClass="reserve-button" text="Rezerwuj" />
+            </HBox>
+            <HBox alignment="CENTER" spacing="20" styleClass="flight-row">
                 <Label styleClass="flight-code" text="CDG" />
                 <Label prefHeight="27.0" prefWidth="716.0" text="Paryż → CDG – 15:00 Paryż">
                <font>
                   <Font size="18.0" />
                </font></Label>
-                <Button styleClass="reserve-button" text="Rezerwuj" />
+                <Button onAction="#goToTicketPage" styleClass="reserve-button" text="Rezerwuj" />
             </HBox>
-            <HBox spacing="20" styleClass="flight-row">
+            <HBox alignment="CENTER" spacing="20" styleClass="flight-row">
                 <Label styleClass="flight-code" text="JFK" />
                 <Label prefHeight="27.0" prefWidth="724.0" text="Nowy Jork → JFK – 10:00 Nowy Jork">
                <font>
                   <Font size="18.0" />
                </font></Label>
-                <Button styleClass="reserve-button" text="Rezerwuj" />
+                <Button onAction="#goToTicketPage" styleClass="reserve-button" text="Rezerwuj" />
             </HBox>
-            <HBox spacing="20" styleClass="flight-row">
+            <HBox alignment="CENTER" spacing="20" styleClass="flight-row">
                 <Label styleClass="flight-code" text="FRA" />
                 <Label prefHeight="27.0" prefWidth="720.0" text="Frankfurt → FRA – 12:00 Frankfurt">
                <font>
                   <Font size="18.0" />
                </font></Label>
-                <Button styleClass="reserve-button" text="Rezerwuj" />
+                <Button onAction="#goToTicketPage" styleClass="reserve-button" text="Rezerwuj" />
             </HBox>
         </VBox>
         <HBox prefHeight="50.0" prefWidth="894.0" spacing="20">

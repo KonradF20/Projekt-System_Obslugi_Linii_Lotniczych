@@ -84,3 +84,26 @@
     -fx-text-fill: #444;
     -fx-font-size: 14px;
 }
+
+.form-box {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px;
+    -fx-border-color: #ddd;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+}
+
+.form-title {
+    -fx-font-size: 23px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1e4d91;
+}
+
+.submit-button {
+    -fx-background-color: #1e4d91;
+    -fx-text-fill: white;
+    -fx-padding: 10 20;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}

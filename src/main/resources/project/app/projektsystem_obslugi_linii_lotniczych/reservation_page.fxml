@@ -8,17 +8,17 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="550.0" prefWidth="974.0" styleClass="root" stylesheets="@../../../style/style1.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.projektsystem_obslugi_linii_lotniczych.ReservationPage">
+<AnchorPane prefHeight="566.0" prefWidth="974.0" styleClass="root" stylesheets="@../../../style/style1.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.projektsystem_obslugi_linii_lotniczych.ReservationPage">
     <HBox alignment="CENTER_LEFT" spacing="30.0" styleClass="top-bar" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
         <ImageView fitHeight="60.0" fitWidth="195.0" pickOnBounds="true">
             <Image url="@../../../images/Logo_FlyNowWhite.png" />
         </ImageView>
         <HBox alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="682.0" spacing="30.0">
             <Button fx:id="flightsButton" onAction="#goToMainPage" styleClass="menu-button" text="Loty" />
-            <Button prefHeight="30.0" prefWidth="146.0" styleClass="menu-button" text="Rezerwacje" />
+            <Button prefHeight="30.0" prefWidth="146.0" styleClass="menu-button" text="Rezerwacje" underline="true" />
         </HBox>
     </HBox>
-    <VBox prefHeight="417.0" prefWidth="934.0" spacing="20" styleClass="menu" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="120.0">
+    <VBox prefHeight="426.0" prefWidth="934.0" spacing="20" styleClass="menu" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="120.0">
         <HBox prefHeight="50.0" prefWidth="894.0" spacing="20">
             <Button fx:id="logoutButton" onAction="#goToLoginPage" styleClass="logout-button" text="Wyloguj" />
             <Label fx:id="infoLabel" alignment="CENTER" prefHeight="31.0" prefWidth="795.0" styleClass="user-info" text=" " />

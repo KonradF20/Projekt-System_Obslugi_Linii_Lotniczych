@@ -10,6 +10,7 @@ import java.sql.SQLException;
 
 public class MainPage extends InfoDisplay{
 
+    @FXML private Button reservationButton;
     @FXML private Button reserveButton;
     @FXML private Label balanceShow;
     @FXML private Button depositButton;
@@ -46,7 +47,7 @@ public class MainPage extends InfoDisplay{
 
     @FXML
     public void goToReservationPage() {
-        Stage stage = (Stage) reserveButton.getScene().getWindow();
+        Stage stage = (Stage) reservationButton.getScene().getWindow();
         ViewPageController.goToReservationPage(stage);
     }
 
@@ -54,5 +55,11 @@ public class MainPage extends InfoDisplay{
     public void goToDepositPage() {
         Stage stage = (Stage) depositButton.getScene().getWindow();
         ViewPageController.goToDepositPage(stage);
+    }
+
+    @FXML
+    public void goToTicketPage() {
+        Stage stage = (Stage) reserveButton.getScene().getWindow();
+        ViewPageController.goToTicketPage(stage);
     }
 }

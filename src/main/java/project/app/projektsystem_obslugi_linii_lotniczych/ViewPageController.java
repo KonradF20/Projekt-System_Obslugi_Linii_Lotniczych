@@ -5,7 +5,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-
 import java.util.Objects;
 
 public class ViewPageController {
@@ -89,6 +88,18 @@ public class ViewPageController {
             stage.centerOnScreen();
         } catch (Exception e) {
             System.out.println("Błąd podczas przejścia do ekranu wpłacania pieniędzy: " + e.getMessage());
+        }
+    }
+
+    public static void goToTicketPage(Stage stage) {
+        //Przejście do ekranu kupowania biletu
+        try {
+            FXMLLoader loader = new FXMLLoader(ViewPageController.class.getResource("/project/app/projektsystem_obslugi_linii_lotniczych/ticket_page.fxml"));
+            Parent root = loader.load();
+            stage.setScene(new Scene(root));
+            stage.centerOnScreen();
+        } catch (Exception e) {
+            System.out.println("Błąd podczas przejścia do ekranu kupowania biletu: " + e.getMessage());
         }
     }
 }

@@ -12,8 +12,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onMouseClicked="#FocusOn" prefHeight="538.0" prefWidth="400.0" styleClass="menu" stylesheets="@../../../style/style.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="project.app.projektsystem_obslugi_linii_lotniczych.SignupPage">
-    <VBox alignment="TOP_CENTER" prefHeight="498.0" prefWidth="400.0" spacing="15.0" styleClass="root" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
+<AnchorPane onMouseClicked="#FocusOn" prefHeight="538.0" prefWidth="400.0" styleClass="menu" stylesheets="@../../../style/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.projektsystem_obslugi_linii_lotniczych.SignupPage">
+    <VBox alignment="TOP_CENTER" prefHeight="498.0" prefWidth="340.0" spacing="15.0" styleClass="root" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
         <ImageView fitHeight="95.0" fitWidth="300.0" pickOnBounds="true">
             <Image url="@../../../images/Logo_FlyNow.png" />
         </ImageView>
