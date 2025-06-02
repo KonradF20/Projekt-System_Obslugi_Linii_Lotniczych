@@ -107,3 +107,20 @@
     -fx-background-radius: 10px;
     -fx-cursor: hand;
 }
+
+.main-background {
+    -fx-background-color: #1e4d91;
+    -fx-padding: 20;
+    -fx-background-radius: 10px;
+}
+
+.ticket-container {
+    -fx-background-color: white;
+    -fx-padding: 15;
+    -fx-background-radius: 5px;
+}
+
+.title-label {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}

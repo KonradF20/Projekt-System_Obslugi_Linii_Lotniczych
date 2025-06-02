@@ -16,7 +16,7 @@ public class DepositPage extends FocusController{
 
     @FXML
     public void deposit() {
-        String deposit = depositField.getText();
+        String deposit = depositField.getText().trim();
         double balance;
 
         if (deposit.isEmpty()){

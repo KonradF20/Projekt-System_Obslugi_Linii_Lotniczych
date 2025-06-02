@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onMouseClicked="#FocusOn2" prefHeight="566.0" prefWidth="974.0" styleClass="root" stylesheets="@../../../style/style1.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.projektsystem_obslugi_linii_lotniczych.AdminPage">
+<AnchorPane onMouseClicked="#FocusOn2" prefHeight="566.0" prefWidth="974.0" styleClass="root" stylesheets="@../../../style/style1.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.projektsystem_obslugi_linii_lotniczych.TicketPage">
     <HBox alignment="CENTER_LEFT" spacing="30.0" styleClass="top-bar" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
         <ImageView fitHeight="60.0" fitWidth="195.0" pickOnBounds="true">
             <Image url="@../../../images/Logo_FlyNowWhite.png" />
