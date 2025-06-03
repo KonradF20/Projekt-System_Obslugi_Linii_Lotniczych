@@ -1,4 +1,4 @@
-package project.app.projektsystem_obslugi_linii_lotniczych;
+package project.app.projektsystem_obslugi_linii_lotniczych.controllers;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,7 +10,7 @@ import java.util.Objects;
 public class ViewPageController {
 
     public static void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(ViewPageController.class.getResource("login_page.fxml"));
+        FXMLLoader loader = new FXMLLoader(ViewPageController.class.getResource("/project/app/projektsystem_obslugi_linii_lotniczych/login_page.fxml"));
         Scene scene = new Scene(loader.load());
         stage.setTitle("FlyNow");
         stage.getIcons().add(new Image(Objects.requireNonNull(ViewPageController.class.getResourceAsStream("/images/Ikonka_FlyNow.png"))));

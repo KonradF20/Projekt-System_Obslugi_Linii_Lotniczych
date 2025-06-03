@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="566.0" prefWidth="974.0" styleClass="root" stylesheets="@../../../style/style1.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.projektsystem_obslugi_linii_lotniczych.ReservationPage">
+<AnchorPane prefHeight="566.0" prefWidth="974.0" styleClass="root" stylesheets="@../../../style/style1.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.projektsystem_obslugi_linii_lotniczych.controllers.ReservationPage">
     <HBox alignment="CENTER_LEFT" spacing="30.0" styleClass="top-bar" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
         <ImageView fitHeight="60.0" fitWidth="195.0" pickOnBounds="true">
             <Image url="@../../../images/Logo_FlyNowWhite.png" />
@@ -24,7 +24,7 @@
         </HBox>
     </HBox>
     <VBox prefHeight="426.0" prefWidth="934.0" spacing="20" styleClass="menu" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="120.0">
-        <VBox prefWidth="860.0" spacing="15" styleClass="main-background" visible="false">
+        <VBox prefWidth="860.0" spacing="15" styleClass="main-background">
             <VBox prefWidth="820.0" spacing="10.0" styleClass="ticket-container">
                 <Label prefHeight="27.0" prefWidth="833.0" styleClass="title-label" text="KARTA POKŁADOWA" />
                 <GridPane hgap="10" vgap="10">
@@ -119,16 +119,18 @@
                 </GridPane>
             </VBox>
         </VBox>
-      <Label alignment="CENTER" prefHeight="17.0" prefWidth="908.0" text="Osiągnięto limit rezerwacji lotów" textFill="RED" visible="false">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-         <VBox.margin>
-            <Insets bottom="15.0" />
-         </VBox.margin>
-      </Label>
+      <HBox alignment="CENTER_RIGHT" prefHeight="37.0" prefWidth="200.0">
+         <children>
+            <Button mnemonicParsing="false" styleClass="submit-button" text="Anuluj rezerwację" />
+            <Label alignment="CENTER" prefHeight="31.0" prefWidth="753.0" text="Osiągnięto limit rezerwacji lotów" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
         <HBox prefHeight="31.0" prefWidth="894.0" spacing="20">
-            <Button fx:id="logoutButton" onAction="#goToLoginPage" styleClass="logout-button" text="Wyloguj" />
+            <Button fx:id="logoutButton" onAction="#goToLoginPage" prefHeight="31.0" prefWidth="204.0" styleClass="logout-button" text="Wyloguj" />
             <Label fx:id="infoLabel" alignment="CENTER" prefHeight="31.0" prefWidth="795.0" styleClass="user-info" text=" " />
         </HBox>
     </VBox>

@@ -1,4 +1,4 @@
-package project.app.projektsystem_obslugi_linii_lotniczych;
+package project.app.projektsystem_obslugi_linii_lotniczych.models;
 
 public class Plane {
     int plane_id;

@@ -1,10 +1,10 @@
-package project.app.projektsystem_obslugi_linii_lotniczych;
+package project.app.projektsystem_obslugi_linii_lotniczych.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-public class ReservationPage extends InfoDisplay{
+public class ReservationPage extends InfoDisplay {
 
     @FXML private Button flightsButton;
     @FXML private Button logoutButton;

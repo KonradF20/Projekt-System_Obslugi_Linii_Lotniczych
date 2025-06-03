@@ -1,4 +1,4 @@
-package project.app.projektsystem_obslugi_linii_lotniczych;
+package project.app.projektsystem_obslugi_linii_lotniczych.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;

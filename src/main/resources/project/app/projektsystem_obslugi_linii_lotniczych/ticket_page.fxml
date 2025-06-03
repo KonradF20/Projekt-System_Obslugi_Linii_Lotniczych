@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onMouseClicked="#FocusOn2" prefHeight="566.0" prefWidth="974.0" styleClass="root" stylesheets="@../../../style/style1.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.projektsystem_obslugi_linii_lotniczych.TicketPage">
+<AnchorPane prefHeight="566.0" prefWidth="974.0" styleClass="root" stylesheets="@../../../style/style1.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.projektsystem_obslugi_linii_lotniczych.controllers.TicketPage">
     <HBox alignment="CENTER_LEFT" spacing="30.0" styleClass="top-bar" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
         <ImageView fitHeight="60.0" fitWidth="195.0" pickOnBounds="true">
             <Image url="@../../../images/Logo_FlyNowWhite.png" />
@@ -26,7 +26,7 @@
                             <font>
                                 <Font name="System Bold" size="12.0" />
                             </font></Label>
-                        <TextField fx:id="flightNumberField" focusTraversable="false" onMouseClicked="#FocusOn2" />
+                        <TextField fx:id="flightNumberField" focusTraversable="false" />
                     </HBox>
                     <HBox alignment="CENTER" spacing="10">
                         <Label text="ID lotniska wylotu:">
@@ -114,7 +114,7 @@
                 </font></Button>
         </VBox>
         <HBox prefHeight="50.0" prefWidth="894.0" spacing="20">
-            <Button fx:id="logoutButton" onAction="#goToLoginPage" styleClass="logout-button" text="Wyloguj" />
+            <Button fx:id="logoutButton" prefHeight="31.0" prefWidth="204.0" styleClass="logout-button" text="Wyloguj" />
             <Label fx:id="infoLabel" alignment="CENTER" prefHeight="31.0" prefWidth="795.0" styleClass="user-info" text=" " />
         </HBox>
     </VBox>

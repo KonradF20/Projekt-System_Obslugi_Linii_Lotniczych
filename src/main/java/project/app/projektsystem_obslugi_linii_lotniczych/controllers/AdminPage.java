@@ -1,4 +1,4 @@
-package project.app.projektsystem_obslugi_linii_lotniczych;
+package project.app.projektsystem_obslugi_linii_lotniczych.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import project.app.projektsystem_obslugi_linii_lotniczych.models.Airport;
+import project.app.projektsystem_obslugi_linii_lotniczych.models.Plane;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminPage extends InfoDisplay{
+public class AdminPage extends InfoDisplay {
 
     @FXML public ComboBox<String> travelClassComboBox;
     @FXML public ComboBox<Airport> departureAirportComboBox;
@@ -122,6 +124,16 @@ public class AdminPage extends InfoDisplay{
             return;
         }
 
+        if (!terminal.matches("[A-Z]")) {
+            addInfo.setText("Nieprawidłowy terminal (np. A, B)");
+            return;
+        }
+
+        if (!gate.matches("[0-9]{1,2}")) {
+            addInfo.setText("Nieprawidłowy gate (np. 7, 13)");
+            return;
+        }
+
         if (departureId == arrivalId) {
             addInfo.setText("Lotnisko wylotu i przylotu nie może być takie samo");
             return;
@@ -148,6 +160,7 @@ public class AdminPage extends InfoDisplay{
         }
     }
 
+    @FXML
     public void clearFields() {
         flightNumberField.clear();
         departureTimeField.clear();

@@ -32,7 +32,7 @@
     -fx-font-weight: bold;
 }
 
-.data {
+.choose {
     -fx-font-size: 20px;
     -fx-font-weight: bold;
 }
@@ -102,6 +102,7 @@
 
 .submit-button {
     -fx-background-color: #1e4d91;
+    -fx-font-weight: bold;
     -fx-text-fill: white;
     -fx-padding: 10 20;
     -fx-background-radius: 10px;
@@ -123,4 +124,22 @@
 .title-label {
     -fx-font-size: 22px;
     -fx-font-weight: bold;
+}
+
+.input-field {
+    -fx-background-radius: 10px;
+    -fx-background-color: white;
+    -fx-border-width: 1px;
+    -fx-border-color: lightgray;
+    -fx-border-radius: 10px;
+}
+
+.input-field:focused{
+    -fx-border-color: lightblue;
+    -fx-border-width: 2px;
+}
+
+.combo-box .list-cell {
+    -fx-alignment: center;
+    -fx-text-alignment: center;
 }

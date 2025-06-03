@@ -1,13 +1,14 @@
-package project.app.projektsystem_obslugi_linii_lotniczych;
+package project.app.projektsystem_obslugi_linii_lotniczych.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class DepositPage extends FocusController{
+public class DepositPage extends FocusController {
 
     @FXML private TextField depositField;
     @FXML private Label depositError;

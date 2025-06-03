@@ -1,15 +1,23 @@
-package project.app.projektsystem_obslugi_linii_lotniczych;
+package project.app.projektsystem_obslugi_linii_lotniczych.controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import project.app.projektsystem_obslugi_linii_lotniczych.models.Airport;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class MainPage extends InfoDisplay{
+public class MainPage extends InfoDisplay {
 
+    @FXML private ComboBox<Airport> chooseAirportComboBox;
+    @FXML private Label errorLabel;
     @FXML private Button reservationButton;
     @FXML private Button reserveButton;
     @FXML private Label balanceShow;
@@ -22,6 +30,24 @@ public class MainPage extends InfoDisplay{
     public void initialize() {
         infoLabel.setText(InfoDisplay.display());
         showBalance();
+        List<Airport> airports = new ArrayList<>();
+
+        try(Connection conn = DatabaseConnection.getConnection()) {
+            String selectSql = "SELECT airport_id, name FROM airports";
+            PreparedStatement selectStmt = conn.prepareStatement(selectSql);
+            ResultSet rs = selectStmt.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("airport_id");
+                String airportName = rs.getString("name");
+                airports.add(new Airport(id, airportName));
+            }
+        }catch (SQLException e){
+            errorLabel.setText("Błąd połączenia z bazą danych: "+ e.getMessage());
+        }
+
+        ObservableList<Airport> airportOptions = FXCollections.observableArrayList(airports);
+        chooseAirportComboBox.setItems(airportOptions);
+        chooseAirportComboBox.getSelectionModel().select(0);
     }
 
     public void showBalance() {

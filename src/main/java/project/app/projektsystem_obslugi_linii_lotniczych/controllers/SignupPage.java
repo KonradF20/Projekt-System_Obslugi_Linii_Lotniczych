@@ -1,14 +1,15 @@
-package project.app.projektsystem_obslugi_linii_lotniczych;
+package project.app.projektsystem_obslugi_linii_lotniczych.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class LoginPage extends FocusController {
+public class SignupPage extends FocusController {
 
     @FXML private TextField emailField;
     @FXML private PasswordField passwordField;
@@ -16,17 +17,16 @@ public class LoginPage extends FocusController {
     @FXML private CheckBox showPasswordCheckBox;
     @FXML private Label emailError;
     @FXML private Label passwordError;
-    @FXML private Button loginButton;
-    @FXML private Button signupButton;
+    @FXML private Button cancelButton;
 
     @FXML
-    public void loginUser() {
+    public void addUser() {
         String email = emailField.getText().trim();
         String password;
         if (showPasswordCheckBox.isSelected()){
             password = visiblePasswordField.getText();
         } else {
-           password = passwordField.getText();
+            password = passwordField.getText();
         }
 
         if (email.isEmpty()) {
@@ -50,32 +50,23 @@ public class LoginPage extends FocusController {
         }
 
         try (Connection conn = DatabaseConnection.getConnection()) {
-            String checkEmailQuery = "SELECT password, role FROM users WHERE email = ?";
-            PreparedStatement emailStmt = conn.prepareStatement(checkEmailQuery);
-            emailStmt.setString(1, email);
-            ResultSet rs = emailStmt.executeQuery();
+            // Sprawdzenie, czy email już istnieje
+            String checkEmailQuery = "SELECT * FROM users WHERE email = ?";
+            PreparedStatement checkStmt = conn.prepareStatement(checkEmailQuery);
+            checkStmt.setString(1, email);
+            ResultSet rs = checkStmt.executeQuery();
 
             if (rs.next()) {
-                String correctPassword = rs.getString("password");
-                String role = rs.getString("role");
-                if (correctPassword.equals(password)) {
-                    InfoDisplay.email = email;
-                    InfoDisplay.role = role;
-                    MainPage.email = email;
-                    DepositPage.email = email;
-                    Stage stage = (Stage) loginButton.getScene().getWindow();
-                    if ("admin".equalsIgnoreCase(role)) {
-                        ViewPageController.goToAdminPage(stage);
-                    } else {
-                        ViewPageController.goToMainPage(stage);
-                    }
-                } else {
-                    passwordError.setText("Niepoprawne hasło");
-                    passwordError.setVisible(true);
-                }
-            } else {
-                emailError.setText("Niepoprawny email");
+                emailError.setText("Email już istnieje");
                 emailError.setVisible(true);
+            } else {
+                // Dodanie nowego użytkownika
+                String insertQuery = "INSERT INTO users (email, password) VALUES (?, ?)";
+                PreparedStatement insertStmt = conn.prepareStatement(insertQuery);
+                insertStmt.setString(1, email);
+                insertStmt.setString(2, password);
+                insertStmt.executeUpdate();
+                gotoLoginPage();
             }
         } catch (SQLException e) {
             passwordError.setText("Błąd połączenia z bazą danych: "+ e.getMessage());
@@ -84,9 +75,9 @@ public class LoginPage extends FocusController {
     }
 
     @FXML
-    public void gotoSignupPage() {
-        Stage stage = (Stage) signupButton.getScene().getWindow();
-        ViewPageController.goToSignupPage(stage);
+    public void gotoLoginPage() {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        ViewPageController.goToLoginPage(stage);
     }
 
     @FXML
@@ -106,4 +97,3 @@ public class LoginPage extends FocusController {
         }
     }
 }
-

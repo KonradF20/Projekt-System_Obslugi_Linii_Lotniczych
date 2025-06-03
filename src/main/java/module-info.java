@@ -14,4 +14,8 @@ module project.app.projektsystem_obslugi_linii_lotniczych {
 
     opens project.app.projektsystem_obslugi_linii_lotniczych to javafx.fxml;
     exports project.app.projektsystem_obslugi_linii_lotniczych;
+    exports project.app.projektsystem_obslugi_linii_lotniczych.models;
+    opens project.app.projektsystem_obslugi_linii_lotniczych.models to javafx.fxml;
+    exports project.app.projektsystem_obslugi_linii_lotniczych.controllers;
+    opens project.app.projektsystem_obslugi_linii_lotniczych.controllers to javafx.fxml;
 }

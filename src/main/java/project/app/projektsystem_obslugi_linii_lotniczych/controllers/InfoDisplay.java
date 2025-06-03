@@ -1,4 +1,4 @@
-package project.app.projektsystem_obslugi_linii_lotniczych;
+package project.app.projektsystem_obslugi_linii_lotniczych.controllers;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
