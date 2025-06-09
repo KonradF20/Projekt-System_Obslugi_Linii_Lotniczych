@@ -105,22 +105,22 @@ public class AdminPage extends InfoDisplay {
         try {
             ticketPrice = Double.parseDouble(price);
         } catch (NumberFormatException e) {
-            addInfo.setText("Nieprawidłowy format ceny (np. 12.5)");
+            addInfo.setText("Nieprawidłowa cena (np. 12.5)");
             return;
         }
 
         if (ticketPrice <= 0) {
-            addInfo.setText("Wprowadź cenę biletu większą od zera");
+            addInfo.setText("Cena biletu musi być większą od zera");
             return;
         }
 
-        if (ticketPrice >= 1000000) {
+        if (ticketPrice >= 100000000) {
             addInfo.setText("Cena biletu jest zbyt wysoka");
             return;
         }
 
         if (!departureTime.matches("\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}") || !arrivalTime.matches("\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}")) {
-            addInfo.setText("Użyj poprawnego formatu daty");
+            addInfo.setText("Nieprawidłowy format daty");
             return;
         }
 
@@ -129,7 +129,7 @@ public class AdminPage extends InfoDisplay {
             return;
         }
 
-        if (!gate.matches("[0-9]{1,2}")) {
+        if (!gate.matches("\\d{1,2}")) {
             addInfo.setText("Nieprawidłowy gate (np. 7, 13)");
             return;
         }
@@ -161,6 +161,12 @@ public class AdminPage extends InfoDisplay {
     }
 
     @FXML
+    public void goToLoginPage() {
+        Stage stage = (Stage) logoutButton.getScene().getWindow();
+        ViewPageController.goToLoginPage(stage);
+    }
+
+    @FXML
     public void clearFields() {
         flightNumberField.clear();
         departureTimeField.clear();
@@ -172,12 +178,6 @@ public class AdminPage extends InfoDisplay {
         arrivalAirportComboBox.getSelectionModel().select(0);
         planeComboBox.getSelectionModel().select(0);
         travelClassComboBox.getSelectionModel().select(0);
-    }
-
-    @FXML
-    public void goToLoginPage() {
-        Stage stage = (Stage) logoutButton.getScene().getWindow();
-        ViewPageController.goToLoginPage(stage);
     }
 
     @FXML

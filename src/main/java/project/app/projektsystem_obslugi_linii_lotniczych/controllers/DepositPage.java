@@ -3,7 +3,6 @@ package project.app.projektsystem_obslugi_linii_lotniczych.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

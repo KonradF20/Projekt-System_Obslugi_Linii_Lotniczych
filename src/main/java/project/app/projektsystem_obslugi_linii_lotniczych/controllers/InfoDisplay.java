@@ -9,6 +9,7 @@ public class InfoDisplay {
     public static String role;
     static String rola;
     static String formattedDate;
+    public static int userId;
 
     public static String display() {
 

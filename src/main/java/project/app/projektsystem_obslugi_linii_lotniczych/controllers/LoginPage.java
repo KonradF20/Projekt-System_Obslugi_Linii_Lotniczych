@@ -51,7 +51,7 @@ public class LoginPage extends FocusController {
         }
 
         try (Connection conn = DatabaseConnection.getConnection()) {
-            String checkEmailQuery = "SELECT password, role FROM users WHERE email = ?";
+            String checkEmailQuery = "SELECT user_id, password, role FROM users WHERE email = ?";
             PreparedStatement emailStmt = conn.prepareStatement(checkEmailQuery);
             emailStmt.setString(1, email);
             ResultSet rs = emailStmt.executeQuery();
@@ -59,11 +59,12 @@ public class LoginPage extends FocusController {
             if (rs.next()) {
                 String correctPassword = rs.getString("password");
                 String role = rs.getString("role");
+                int userId = rs.getInt("user_id");
                 if (correctPassword.equals(password)) {
                     InfoDisplay.email = email;
                     InfoDisplay.role = role;
-                    MainPage.email = email;
                     DepositPage.email = email;
+                    InfoDisplay.userId = userId;
                     Stage stage = (Stage) loginButton.getScene().getWindow();
                     if ("admin".equalsIgnoreCase(role)) {
                         ViewPageController.goToAdminPage(stage);

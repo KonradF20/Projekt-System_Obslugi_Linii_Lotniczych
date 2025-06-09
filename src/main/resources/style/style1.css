@@ -130,12 +130,12 @@
     -fx-background-radius: 10px;
     -fx-background-color: white;
     -fx-border-width: 1px;
-    -fx-border-color: lightgray;
+    -fx-border-color: #d0d0d0;
     -fx-border-radius: 10px;
 }
 
 .input-field:focused{
-    -fx-border-color: lightblue;
+    -fx-border-color: #099ed4;
     -fx-border-width: 2px;
 }
 

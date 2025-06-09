@@ -123,7 +123,7 @@
                <Insets />
             </VBox.margin>
          </GridPane>
-        <Button alignment="CENTER" defaultButton="true" onAction="#addFlight" prefHeight="37.0" prefWidth="201.0" styleClass="submit-button" text="Dodaj Lot" />
+        <Button alignment="CENTER" defaultButton="true" onAction="#addFlight" prefHeight="37.0" prefWidth="175.0" styleClass="submit-button" text="Dodaj Lot" />
     </VBox>
     <HBox prefHeight="50.0" prefWidth="894.0" spacing="20">
         <Button fx:id="logoutButton" onAction="#goToLoginPage" prefHeight="31.0" prefWidth="204.0" styleClass="logout-button" text="Wyloguj" />

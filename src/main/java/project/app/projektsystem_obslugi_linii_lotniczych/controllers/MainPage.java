@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import project.app.projektsystem_obslugi_linii_lotniczych.models.Airport;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,7 +23,6 @@ public class MainPage extends InfoDisplay {
     @FXML private Button depositButton;
     @FXML private Button logoutButton;
     @FXML private Label infoLabel;
-    public static String email;
 
     @FXML
     public void initialize() {
@@ -61,7 +59,7 @@ public class MainPage extends InfoDisplay {
                 balanceShow.setText(rs.getString("balance")+ " zł");
             }
         } catch (SQLException e) {
-            balanceShow.setText("Błąd podczas pobierania salda: " + e.getMessage());
+            errorLabel.setText("Błąd podczas pobierania salda: " + e.getMessage());
         }
     }
 
