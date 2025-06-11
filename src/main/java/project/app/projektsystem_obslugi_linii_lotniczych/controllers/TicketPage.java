@@ -6,15 +6,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TicketPage extends InfoDisplay {
 
+    // Elementy interfejsu GUI zdefiniowane w pliku FXML
     @FXML private ComboBox<String> documentComboBox;
     @FXML private ComboBox<String> baggageComboBox;
     @FXML private TextField firstNameField;
@@ -27,31 +25,52 @@ public class TicketPage extends InfoDisplay {
     @FXML private TextField phoneField;
     @FXML private TextField weightField;
     @FXML private TextField dimensionsField;
+    @FXML private Button buyButton;
     @FXML private Button cancelButton;
     @FXML private Label infoLabel;
     @FXML private Label addInfo;
+    private int flightId;
+    private double flightPrice;
+    private double userBalance;
+
+    // Mapy konwertujące widoczne etykiety na wartości do bazy danych
+    Map<String, String> documentMap = new HashMap<>();
+    Map<String, String> bagaggeMap = new HashMap<>();
 
     @FXML
     public void initialize() {
+        // Wyświetlanie informacji o zalogowanym użytkowniku
         infoLabel.setText(InfoDisplay.display());
-        List<String> documents = new ArrayList<>();
-        documents.add("Dowód osobisty");
-        documents.add("Paszport");
-        List<String> luggage = new ArrayList<>();
-        luggage.add("Rejestrowany");
-        luggage.add("Podręczny");
 
-        ObservableList<String> documentOptions = FXCollections.observableArrayList(documents);
+        // Inicjalizacja map dokumentów i bagażu
+        documentMap.put("Dowód osobisty", "ID_CARD");
+        documentMap.put("Paszport", "PASSPORT");
+        bagaggeMap.put("Rejestrowany","registered");
+        bagaggeMap.put("Podręczny","handy");
+
+        ObservableList<String> documentOptions = FXCollections.observableArrayList(documentMap.keySet());
         documentComboBox.setItems(documentOptions);
         documentComboBox.getSelectionModel().select(0);
 
-        ObservableList<String> baggageOptions = FXCollections.observableArrayList(luggage);
+        ObservableList<String> baggageOptions = FXCollections.observableArrayList(bagaggeMap.keySet());
         baggageComboBox.setItems(baggageOptions);
         baggageComboBox.getSelectionModel().select(0);
     }
 
+    public void setFlightId(int flightId) {
+        this.flightId = flightId;
+    }
+
+    public void setFlightPrice(double flightPrice) {
+        this.flightPrice = flightPrice;
+    }
+
+    public void setUserBalance(double userBalance) {
+        this.userBalance = userBalance;
+    }
+
     @FXML
-    public void buyTicket(){
+    public void buyTicket() {
         String firstName = firstNameField.getText().trim();
         String lastName = lastNameField.getText().trim();
         String birthDate = birthDateField.getText().trim();
@@ -60,8 +79,10 @@ public class TicketPage extends InfoDisplay {
         String street = streetField.getText().trim();
         String postalCode = postalCodeField.getText().trim();
         String phone = phoneField.getText().trim();
-        String documentType = documentComboBox.getSelectionModel().getSelectedItem();
-        String baggageType = baggageComboBox.getSelectionModel().getSelectedItem();
+        String documentTypeLabel = documentComboBox.getSelectionModel().getSelectedItem();
+        String documentType = documentMap.get(documentTypeLabel);
+        String baggageTypeLabel = baggageComboBox.getSelectionModel().getSelectedItem();
+        String baggageType = bagaggeMap.get(baggageTypeLabel);
         String weight = weightField.getText().trim();
         String dimensions = dimensionsField.getText().trim();
         double baggageWeight;
@@ -109,7 +130,19 @@ public class TicketPage extends InfoDisplay {
         }
 
         try (Connection conn = DatabaseConnection.getConnection()) {
-            String passengersInsertSql = "INSERT INTO passengers (first_name, last_name, date_of_birth, street, city, postal_code, country, phone, document_type, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String reservationsInsertSql = "INSERT INTO reservations (flight_id) VALUES (?)";
+            PreparedStatement reservationsInsertStmt = conn.prepareStatement(reservationsInsertSql, Statement.RETURN_GENERATED_KEYS);
+            reservationsInsertStmt.setInt(1, flightId);
+            reservationsInsertStmt.executeUpdate();
+            ResultSet reservation_rs = reservationsInsertStmt.getGeneratedKeys();
+            if (!reservation_rs.next()) {
+                addInfo.setText("Błąd przy dodawaniu rezerwacji");
+                return;
+            }
+
+            int reservationId = reservation_rs.getInt(1);
+
+            String passengersInsertSql = "INSERT INTO passengers (first_name, last_name, date_of_birth, street, city, postal_code, country, phone, document_type, user_id, reservation_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement passengersInsertStmt = conn.prepareStatement(passengersInsertSql);
             passengersInsertStmt.setString(1, firstName);
             passengersInsertStmt.setString(2, lastName);
@@ -121,30 +154,25 @@ public class TicketPage extends InfoDisplay {
             passengersInsertStmt.setString(8, phone);
             passengersInsertStmt.setString(9, documentType);
             passengersInsertStmt.setInt(10, userId);
+            passengersInsertStmt.setInt(11, reservationId);
             passengersInsertStmt.executeUpdate();
 
-            ResultSet passenger_rs = passengersInsertStmt.getGeneratedKeys();
-            if (!passenger_rs.next()) {
-                addInfo.setText("Błąd przy dodawaniu pasażera");
-                return;
-            }
-
-            int passengerId = passenger_rs.getInt(1);
-
-            String baggageInsertSql = "INSERT INTO baggage (weight, dimensions, type) VALUES (?, ?, ?)";
+            String baggageInsertSql = "INSERT INTO baggage (weight, dimensions, type, reservation_id) VALUES (?, ?, ?, ?)";
             PreparedStatement baggageInsertStmt = conn.prepareStatement(baggageInsertSql);
             baggageInsertStmt.setDouble(1, baggageWeight);
             baggageInsertStmt.setString(2, dimensions);
             baggageInsertStmt.setString(3, baggageType);
+            baggageInsertStmt.setInt(4, reservationId);
             baggageInsertStmt.executeUpdate();
 
-            //int flightId = InfoDisplay.getSelectedFlightId();
+            double newBalance = userBalance - flightPrice;
 
-            String reservationsInsertSql = "INSERT INTO reservations (passenger_id, flight_id) VALUES (?, ?)";
-            PreparedStatement reservationsInsertStmt = conn.prepareStatement(reservationsInsertSql);
-            reservationsInsertStmt.setInt(1, passengerId);
-           // reservationsInsertStmt.setInt(2, flightId);
-            reservationsInsertStmt.executeUpdate();
+            String balanceUpdateSql = "UPDATE users SET balance = ? WHERE user_id = ?";
+            PreparedStatement balanceUpdateStmt = conn.prepareStatement(balanceUpdateSql);
+            balanceUpdateStmt.setDouble(1, newBalance);
+            balanceUpdateStmt.setInt(2, userId);
+            balanceUpdateStmt.executeUpdate();
+
             addInfo.setText("Pomyślnie zarezerwowano lot!");
             clearFields();
         } catch (SQLException e) {
@@ -172,6 +200,7 @@ public class TicketPage extends InfoDisplay {
         dimensionsField.clear();
         documentComboBox.getSelectionModel().select(0);
         baggageComboBox.getSelectionModel().select(0);
+        buyButton.setVisible(false);
     }
 
     @FXML

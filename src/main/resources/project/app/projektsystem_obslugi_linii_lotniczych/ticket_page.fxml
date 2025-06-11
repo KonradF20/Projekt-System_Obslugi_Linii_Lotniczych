@@ -126,10 +126,10 @@
                   <Cursor fx:constant="HAND" />
                </cursor></ComboBox>
             </GridPane>
-            <Button alignment="CENTER" defaultButton="true" onAction="#buyTicket" prefHeight="37.0" prefWidth="175.0" styleClass="submit-button" text="Kup Bilet" />
+            <Button fx:id="buyButton" alignment="CENTER" defaultButton="true" onAction="#buyTicket" prefHeight="37.0" prefWidth="175.0" styleClass="submit-button" text="Kup Bilet" />
         </VBox>
         <HBox prefHeight="50.0" prefWidth="894.0" spacing="20">
-            <Button fx:id="cancelButton" onAction="#goToMainPage" prefHeight="31.0" prefWidth="204.0" styleClass="logout-button" text="Anuluj" />
+            <Button fx:id="cancelButton" onAction="#goToMainPage" prefHeight="31.0" prefWidth="204.0" styleClass="logout-button" text="Cofnij" />
             <Label fx:id="infoLabel" alignment="CENTER" prefHeight="31.0" prefWidth="795.0" styleClass="user-info" text=" " />
         </HBox>
     </VBox>
