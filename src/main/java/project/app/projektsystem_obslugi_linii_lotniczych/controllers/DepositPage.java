@@ -9,16 +9,20 @@ import java.sql.SQLException;
 
 public class DepositPage extends FocusController {
 
+    // Elementy interfejsu GUI zdefiniowane w pliku FXML
     @FXML private TextField depositField;
     @FXML private Label depositError;
     @FXML private Button cancelButton;
     public static String email;
 
+    // Metoda odpowiedzialna za doładowywanie salda zalogowanego użytkownika
     @FXML
     public void deposit() {
+        // Pobranie danych z pola tekstowego
         String deposit = depositField.getText().trim();
         double balance;
 
+        // Walidacja danych wejściowych kwoty
         if (deposit.isEmpty()){
             depositError.setText("Podaj kwotę");
             depositError.setVisible(true);
@@ -45,6 +49,7 @@ public class DepositPage extends FocusController {
             return;
         }
 
+        // Aktualizacja salda użytkownika
         try (Connection conn = DatabaseConnection.getConnection()){
             String sql = "UPDATE users SET balance = balance + ? WHERE email = ?";
             PreparedStatement balanceStmt = conn.prepareStatement(sql);
@@ -58,6 +63,7 @@ public class DepositPage extends FocusController {
         }
     }
 
+    // Przejście do ekranu głównego użytkownik
     @FXML
     public void goToMainPage() {
         Stage stage = (Stage) cancelButton.getScene().getWindow();

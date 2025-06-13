@@ -3,6 +3,8 @@ package project.app.projektsystem_obslugi_linii_lotniczych.models;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+// Klasa przedstawiająca dane lotów
+
 public class Flights {
     int flight_id;
     String departure_iata_code;
@@ -15,6 +17,7 @@ public class Flights {
     double price;
     String travel_class;
 
+    // Gettery i Settery dla klasy Flights
     public int getFlight_id() {
         return flight_id;
     }
@@ -95,6 +98,7 @@ public class Flights {
         this.travel_class = travel_class;
     }
 
+    // Nadpisana metoda odpowiedzialna za czytelne wyświetlenie informacji o locie
     @Override
     public String toString() {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM HH:mm");

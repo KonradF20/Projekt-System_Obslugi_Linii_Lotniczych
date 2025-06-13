@@ -7,11 +7,11 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.util.Objects;
 
-//Kontroler do zarządzania przejściami między widokami w aplikacji FlyNow
+// Kontroler do zarządzania przejściami między widokami w aplikacji FlyNow
 
 public class ViewPageController {
 
-    //Uruchomienie głównego okna aplikacji i załadowanie ekranu logowania
+    // Uruchomienie głównego okna aplikacji i załadowanie ekranu logowania
 
     public static void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader(ViewPageController.class.getResource("/project/app/projektsystem_obslugi_linii_lotniczych/login_page.fxml"));
@@ -23,7 +23,7 @@ public class ViewPageController {
         stage.show();
     }
 
-    //Przejście do ekranu logowania
+    // Przejście do ekranu logowania
 
     public static void goToLoginPage(Stage stage) {
         try {
@@ -36,7 +36,7 @@ public class ViewPageController {
         }
     }
 
-    //Przejście do ekranu rejestracji
+    // Przejście do ekranu rejestracji
 
     public static void goToSignupPage(Stage stage) {
         try {
@@ -49,7 +49,7 @@ public class ViewPageController {
         }
     }
 
-    //Przejście do ekranu głównego użytkownika
+    // Przejście do ekranu głównego użytkownika
 
     public static void goToMainPage(Stage stage) {
         try {
@@ -62,7 +62,7 @@ public class ViewPageController {
         }
     }
 
-    //Przejście do ekranu głównego administratora
+    // Przejście do ekranu głównego administratora
 
     public static void goToAdminPage(Stage stage) {
         try {
@@ -75,7 +75,7 @@ public class ViewPageController {
         }
     }
 
-    //Przejście do ekranu rezerwacji
+    // Przejście do ekranu rezerwacji
 
     public static void goToReservationPage(Stage stage) {
         try {
@@ -88,7 +88,7 @@ public class ViewPageController {
         }
     }
 
-    //Przejście do ekranu wpłacania pieniędzy
+    // Przejście do ekranu wpłacania pieniędzy
 
     public static void goToDepositPage(Stage stage) {
         try {
@@ -101,7 +101,7 @@ public class ViewPageController {
         }
     }
 
-    //Przejście do ekranu kupowania biletu z przekazaniem zmiennych
+    // Przejście do ekranu kupowania biletu z przekazaniem zmiennych
 
     public static void goToTicketPage(Stage stage, int selectedFlightId, double flightPrice, double userBalance) {
         try {

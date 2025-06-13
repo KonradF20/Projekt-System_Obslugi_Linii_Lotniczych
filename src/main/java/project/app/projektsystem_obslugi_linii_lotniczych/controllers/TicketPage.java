@@ -33,30 +33,34 @@ public class TicketPage extends InfoDisplay {
     private double flightPrice;
     private double userBalance;
 
-    // Mapy konwertujące widoczne etykiety na wartości do bazy danych
+    // Mapy, które przekształcają widoczne etykiety na wartości przechowywane w bazie danych
     Map<String, String> documentMap = new HashMap<>();
     Map<String, String> bagaggeMap = new HashMap<>();
 
+    // Metoda odpowiedzialna za inicjalizacje strony kupowania biletu
     @FXML
     public void initialize() {
         // Wyświetlanie informacji o zalogowanym użytkowniku
         infoLabel.setText(InfoDisplay.display());
 
-        // Inicjalizacja map dokumentów i bagażu
+        // Inicjowanie mapy dokumentów i bagażu
         documentMap.put("Dowód osobisty", "ID_CARD");
         documentMap.put("Paszport", "PASSPORT");
         bagaggeMap.put("Rejestrowany","registered");
         bagaggeMap.put("Podręczny","handy");
 
+        // Ustawienie wybierania dokumentów z ComboBoxa
         ObservableList<String> documentOptions = FXCollections.observableArrayList(documentMap.keySet());
         documentComboBox.setItems(documentOptions);
         documentComboBox.getSelectionModel().select(0);
 
+        // Ustawienie wybierania bagażu z ComboBoxa
         ObservableList<String> baggageOptions = FXCollections.observableArrayList(bagaggeMap.keySet());
         baggageComboBox.setItems(baggageOptions);
         baggageComboBox.getSelectionModel().select(0);
     }
 
+    // Settery przekazujące dane z poprzedniego widoku
     public void setFlightId(int flightId) {
         this.flightId = flightId;
     }
@@ -69,8 +73,10 @@ public class TicketPage extends InfoDisplay {
         this.userBalance = userBalance;
     }
 
+    // Metoda odpowiedzialna za kupowanie biletu
     @FXML
     public void buyTicket() {
+        // Pobranie danych z formularza
         String firstName = firstNameField.getText().trim();
         String lastName = lastNameField.getText().trim();
         String birthDate = birthDateField.getText().trim();
@@ -87,6 +93,7 @@ public class TicketPage extends InfoDisplay {
         String dimensions = dimensionsField.getText().trim();
         double baggageWeight;
 
+        // Walidacja danych wejściowych
         if (firstName.isEmpty() || lastName.isEmpty() || birthDate.isEmpty() || country.isEmpty() || city.isEmpty() || street.isEmpty() || postalCode.isEmpty() || phone.isEmpty() || weight.isEmpty() || dimensions.isEmpty()) {
             addInfo.setText("Uzupełnij wszystkie pola");
             return;
@@ -130,6 +137,7 @@ public class TicketPage extends InfoDisplay {
         }
 
         try (Connection conn = DatabaseConnection.getConnection()) {
+            // Dodanie rezerwacji
             String reservationsInsertSql = "INSERT INTO reservations (flight_id) VALUES (?)";
             PreparedStatement reservationsInsertStmt = conn.prepareStatement(reservationsInsertSql, Statement.RETURN_GENERATED_KEYS);
             reservationsInsertStmt.setInt(1, flightId);
@@ -142,6 +150,7 @@ public class TicketPage extends InfoDisplay {
 
             int reservationId = reservation_rs.getInt(1);
 
+            // Dodanie pasażera do rezerwacji
             String passengersInsertSql = "INSERT INTO passengers (first_name, last_name, date_of_birth, street, city, postal_code, country, phone, document_type, user_id, reservation_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement passengersInsertStmt = conn.prepareStatement(passengersInsertSql);
             passengersInsertStmt.setString(1, firstName);
@@ -157,6 +166,7 @@ public class TicketPage extends InfoDisplay {
             passengersInsertStmt.setInt(11, reservationId);
             passengersInsertStmt.executeUpdate();
 
+            // Dodanie bagażu do rezerwacji
             String baggageInsertSql = "INSERT INTO baggage (weight, dimensions, type, reservation_id) VALUES (?, ?, ?, ?)";
             PreparedStatement baggageInsertStmt = conn.prepareStatement(baggageInsertSql);
             baggageInsertStmt.setDouble(1, baggageWeight);
@@ -167,6 +177,7 @@ public class TicketPage extends InfoDisplay {
 
             double newBalance = userBalance - flightPrice;
 
+            // Aktualizacja salda użytkownika
             String balanceUpdateSql = "UPDATE users SET balance = ? WHERE user_id = ?";
             PreparedStatement balanceUpdateStmt = conn.prepareStatement(balanceUpdateSql);
             balanceUpdateStmt.setDouble(1, newBalance);
@@ -180,12 +191,14 @@ public class TicketPage extends InfoDisplay {
         }
     }
 
+    // Przejście do ekranu głównego użytkownika
     @FXML
     public void goToMainPage() {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         ViewPageController.goToMainPage(stage);
     }
 
+    // Metoda odpowiedzialna za czyszczenie wszystkich pól formularza
     @FXML
     public void clearFields() {
         firstNameField.clear();
@@ -203,6 +216,7 @@ public class TicketPage extends InfoDisplay {
         buyButton.setVisible(false);
     }
 
+    // Metoda odpowiedzialna za aktywację fokusu pól formularza po kliknięciu
     @FXML
     public void FocusOn3(MouseEvent event) {
         firstNameField.setFocusTraversable(true);

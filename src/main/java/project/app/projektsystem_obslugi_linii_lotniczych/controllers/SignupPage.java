@@ -3,7 +3,6 @@ package project.app.projektsystem_obslugi_linii_lotniczych.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +10,7 @@ import java.sql.SQLException;
 
 public class SignupPage extends FocusController {
 
+    // Elementy interfejsu GUI zdefiniowane w pliku FXML
     @FXML private TextField emailField;
     @FXML private PasswordField passwordField;
     @FXML private TextField visiblePasswordField;
@@ -19,16 +19,21 @@ public class SignupPage extends FocusController {
     @FXML private Label passwordError;
     @FXML private Button cancelButton;
 
+    // Metoda odpowiedzialna za dodanie użytkownika
     @FXML
     public void addUser() {
+        // Pobranie danych z pól tekstowych
         String email = emailField.getText().trim();
         String password;
+
+        // Pobranie hasła z odpowiedniego pola w zależności od widoczności
         if (showPasswordCheckBox.isSelected()){
             password = visiblePasswordField.getText();
         } else {
             password = passwordField.getText();
         }
 
+        // Walidacja danych wejściowych emailu
         if (email.isEmpty()) {
             emailError.setText("Email nie może być pusty");
             emailError.setVisible(true);
@@ -41,6 +46,7 @@ public class SignupPage extends FocusController {
             emailError.setVisible(false);
         }
 
+        // Walidacja danych wejściowych hasła
         if (password.isEmpty()) {
             passwordError.setText("Hasło nie może być puste");
             passwordError.setVisible(true);
@@ -74,12 +80,14 @@ public class SignupPage extends FocusController {
         }
     }
 
+    // Przejście do ekranu logowania
     @FXML
     public void gotoLoginPage() {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         ViewPageController.goToLoginPage(stage);
     }
 
+    // Metoda odpowiedzialna za zmianę widoczności hasła
     @FXML
     public void ChangePasswordVisibility(){
         if (showPasswordCheckBox.isSelected()) {

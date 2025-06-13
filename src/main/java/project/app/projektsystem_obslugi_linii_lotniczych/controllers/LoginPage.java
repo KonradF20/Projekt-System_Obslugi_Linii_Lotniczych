@@ -3,7 +3,6 @@ package project.app.projektsystem_obslugi_linii_lotniczych.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +10,7 @@ import java.sql.SQLException;
 
 public class LoginPage extends FocusController {
 
+    // Elementy interfejsu GUI zdefiniowane w pliku FXML
     @FXML private TextField emailField;
     @FXML private PasswordField passwordField;
     @FXML private TextField visiblePasswordField;
@@ -20,16 +20,21 @@ public class LoginPage extends FocusController {
     @FXML private Button loginButton;
     @FXML private Button signupButton;
 
+    // Metoda odpowiedzialna za logowanie użytkownika
     @FXML
     public void loginUser() {
+        // Pobranie danych z pól tekstowych
         String email = emailField.getText().trim();
         String password;
+
+        // Pobranie hasła z odpowiedniego pola w zależności od widoczności
         if (showPasswordCheckBox.isSelected()){
             password = visiblePasswordField.getText();
         } else {
            password = passwordField.getText();
         }
 
+        // Walidacja danych wejściowych emailu
         if (email.isEmpty()) {
             emailError.setText("Email nie może być pusty");
             emailError.setVisible(true);
@@ -42,6 +47,7 @@ public class LoginPage extends FocusController {
             emailError.setVisible(false);
         }
 
+        // Walidacja danych wejściowych hasła
         if (password.isEmpty()) {
             passwordError.setText("Hasło nie może być puste");
             passwordError.setVisible(true);
@@ -50,21 +56,26 @@ public class LoginPage extends FocusController {
             passwordError.setVisible(false);
         }
 
+        // Sprawdzenie poprawności danych logowania
         try (Connection conn = DatabaseConnection.getConnection()) {
             String checkEmailQuery = "SELECT user_id, password, role FROM users WHERE email = ?";
             PreparedStatement emailStmt = conn.prepareStatement(checkEmailQuery);
             emailStmt.setString(1, email);
             ResultSet rs = emailStmt.executeQuery();
 
+            // Sprawdzamy hasło, jeśli email istnieje
             if (rs.next()) {
                 String correctPassword = rs.getString("password");
                 String role = rs.getString("role");
                 int userId = rs.getInt("user_id");
                 if (correctPassword.equals(password)) {
+                    // Zapisanie informacji o użytkowniku w zmiennych statycznych
                     InfoDisplay.email = email;
                     InfoDisplay.role = role;
                     DepositPage.email = email;
                     InfoDisplay.userId = userId;
+
+                    // Przejście do odpowiedniej strony w zależności od roli
                     Stage stage = (Stage) loginButton.getScene().getWindow();
                     if ("admin".equalsIgnoreCase(role)) {
                         ViewPageController.goToAdminPage(stage);
@@ -85,12 +96,14 @@ public class LoginPage extends FocusController {
         }
     }
 
+    // Przejście do ekranu rejestracji
     @FXML
     public void gotoSignupPage() {
         Stage stage = (Stage) signupButton.getScene().getWindow();
         ViewPageController.goToSignupPage(stage);
     }
 
+    // Metoda odpowiedzialna za zmianę widoczności hasła
     @FXML
     public void ChangePasswordVisibility(){
         if (showPasswordCheckBox.isSelected()) {

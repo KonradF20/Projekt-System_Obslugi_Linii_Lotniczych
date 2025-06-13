@@ -17,6 +17,7 @@ import java.util.List;
 
 public class AdminPage extends InfoDisplay {
 
+    // Elementy interfejsu GUI zdefiniowane w pliku FXML
     @FXML public ComboBox<String> travelClassComboBox;
     @FXML public ComboBox<Airport> departureAirportComboBox;
     @FXML public ComboBox<Airport> arrivalAirportComboBox;
@@ -31,9 +32,13 @@ public class AdminPage extends InfoDisplay {
     @FXML private Label infoLabel;
     @FXML private Label addInfo;
 
+    // Metoda odpowiedzialna za inicjalizacje strony administratora
     @FXML
     public void initialize() {
+        // Wyświetlanie informacji o zalogowanym administratorze
         infoLabel.setText(InfoDisplay.display());
+
+        // Listy do przechowywania informacji o lotniskach, samolotach i klasach podróży
         List<Airport> airports = new ArrayList<>();
         List<Plane> planes = new ArrayList<>();
         List<String> classes = new ArrayList<>();
@@ -41,6 +46,7 @@ public class AdminPage extends InfoDisplay {
         classes.add("Business");
         classes.add("First");
 
+        // Pobieranie dostępnych lotnisk z bazy danych
         try(Connection conn = DatabaseConnection.getConnection()) {
             String selectSql = "SELECT airport_id, name FROM airports";
             PreparedStatement selectStmt = conn.prepareStatement(selectSql);
@@ -54,6 +60,7 @@ public class AdminPage extends InfoDisplay {
             addInfo.setText("Błąd połączenia z bazą danych: "+ e.getMessage());
         }
 
+        // Pobieranie dostępnych samolotów z bazy danych
         try(Connection conn = DatabaseConnection.getConnection()) {
             String selectSql = "SELECT * FROM planes";
             PreparedStatement selectStmt = conn.prepareStatement(selectSql);
@@ -68,23 +75,28 @@ public class AdminPage extends InfoDisplay {
             addInfo.setText("Błąd połączenia z bazą danych: "+ e.getMessage());
         }
 
+        // Ustawienie wybierania lotnisk z ComboBoxa
         ObservableList<Airport> airportOptions = FXCollections.observableArrayList(airports);
         departureAirportComboBox.setItems(airportOptions);
         departureAirportComboBox.getSelectionModel().select(0);
         arrivalAirportComboBox.setItems(airportOptions);
         arrivalAirportComboBox.getSelectionModel().select(0);
 
+        // Ustawienie wybierania samolotów z ComboBoxa
         ObservableList<Plane> planeOptions = FXCollections.observableArrayList(planes);
         planeComboBox.setItems(planeOptions);
         planeComboBox.getSelectionModel().select(0);
 
+        // Ustawienie wybierania klasy podróży z ComboBoxa
         ObservableList<String> classOptions = FXCollections.observableArrayList(classes);
         travelClassComboBox.setItems(classOptions);
         travelClassComboBox.getSelectionModel().select(0);
     }
 
+    // Metoda odpowiedzialna za dodawanie nowego lotu
     @FXML
     public void addFlight() {
+        // Pobranie danych z formularza
         String flightNumber = flightNumberField.getText().trim();
         int departureId = departureAirportComboBox.getSelectionModel().getSelectedItem().getAirport_id();
         int arrivalId = arrivalAirportComboBox.getSelectionModel().getSelectedItem().getAirport_id();
@@ -97,6 +109,7 @@ public class AdminPage extends InfoDisplay {
         String gate = gateField.getText().trim();
         double ticketPrice;
 
+        // Walidacja danych wejściowych
         if (flightNumber.isEmpty() || departureTime.isEmpty() || arrivalTime.isEmpty() || price.isEmpty() || terminal.isEmpty() || gate.isEmpty()) {
             addInfo.setText("Uzupełnij wszystkie pola");
             return;
@@ -139,6 +152,7 @@ public class AdminPage extends InfoDisplay {
             return;
         }
 
+        // Dodanie lotu
         try (Connection conn = DatabaseConnection.getConnection()){
             String insertSql = "INSERT INTO flights (flight_number, departure_airport_id, arrival_airport_id, departure_time, arrival_time, plane_id, price, travel_class, terminal, gate) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement insertStmt = conn.prepareStatement(insertSql);
@@ -160,12 +174,14 @@ public class AdminPage extends InfoDisplay {
         }
     }
 
+    // Przejście do ekranu logowania
     @FXML
     public void goToLoginPage() {
         Stage stage = (Stage) logoutButton.getScene().getWindow();
         ViewPageController.goToLoginPage(stage);
     }
 
+    // Metoda odpowiedzialna za czyszczenie wszystkich pól formularza
     @FXML
     public void clearFields() {
         flightNumberField.clear();
@@ -180,6 +196,7 @@ public class AdminPage extends InfoDisplay {
         travelClassComboBox.getSelectionModel().select(0);
     }
 
+    // Metoda odpowiedzialna za aktywację fokusu pól formularza po kliknięciu
     @FXML
     public void FocusOn2(MouseEvent event) {
         flightNumberField.setFocusTraversable(true);
