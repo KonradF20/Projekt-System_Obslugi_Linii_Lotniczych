@@ -1,0 +1,41 @@
+@startuml
+class project.app.projektsystem_obslugi_linii_lotniczych.controllers.SignupPage {
+}
+class project.app.projektsystem_obslugi_linii_lotniczych.controllers.AdminPage {
+}
+class project.app.projektsystem_obslugi_linii_lotniczych.controllers.DatabaseConnection {
+}
+class project.app.projektsystem_obslugi_linii_lotniczych.controllers.ViewPageController {
+}
+class project.app.projektsystem_obslugi_linii_lotniczych.controllers.TicketPage {
+}
+class project.app.projektsystem_obslugi_linii_lotniczych.models.Flights {
+}
+class project.app.projektsystem_obslugi_linii_lotniczych.models.Airport {
+}
+class project.app.projektsystem_obslugi_linii_lotniczych.controllers.DepositPage {
+}
+class project.app.projektsystem_obslugi_linii_lotniczych.Main {
+}
+class project.app.projektsystem_obslugi_linii_lotniczych.controllers.FocusController {
+}
+class project.app.projektsystem_obslugi_linii_lotniczych.controllers.InfoDisplay {
+}
+class project.app.projektsystem_obslugi_linii_lotniczych.models.Plane {
+}
+class project.app.projektsystem_obslugi_linii_lotniczych.controllers.MainPage {
+}
+class project.app.projektsystem_obslugi_linii_lotniczych.controllers.LoginPage {
+}
+class project.app.projektsystem_obslugi_linii_lotniczych.controllers.ReservationPage {
+}
+
+
+project.app.projektsystem_obslugi_linii_lotniczych.controllers.FocusController <|-- project.app.projektsystem_obslugi_linii_lotniczych.controllers.SignupPage
+project.app.projektsystem_obslugi_linii_lotniczych.controllers.InfoDisplay <|-- project.app.projektsystem_obslugi_linii_lotniczych.controllers.AdminPage
+project.app.projektsystem_obslugi_linii_lotniczych.controllers.InfoDisplay <|-- project.app.projektsystem_obslugi_linii_lotniczych.controllers.TicketPage
+project.app.projektsystem_obslugi_linii_lotniczych.controllers.FocusController <|-- project.app.projektsystem_obslugi_linii_lotniczych.controllers.DepositPage
+project.app.projektsystem_obslugi_linii_lotniczych.controllers.InfoDisplay <|-- project.app.projektsystem_obslugi_linii_lotniczych.controllers.MainPage
+project.app.projektsystem_obslugi_linii_lotniczych.controllers.FocusController <|-- project.app.projektsystem_obslugi_linii_lotniczych.controllers.LoginPage
+project.app.projektsystem_obslugi_linii_lotniczych.controllers.InfoDisplay <|-- project.app.projektsystem_obslugi_linii_lotniczych.controllers.ReservationPage
+@enduml
